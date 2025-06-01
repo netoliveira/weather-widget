@@ -1,8 +1,9 @@
-import type { WeatherItemProps } from '@/types/weather-item-props'
 import SearchCity from './input-search'
 import WeatherCurrent from './weather-current'
 import WeatherItem from './weather-hour-item'
-import { LuLink2Off } from 'react-icons/lu'
+import NotFoundCity from './not-found-city'
+
+import type { WeatherItemProps } from '@/types/weather-item-props'
 
 interface WeatherWidgetProps {
   city: string
@@ -21,17 +22,7 @@ export default async function WeatherWidget({ city }: WeatherWidgetProps) {
     .catch((err) => console.log(err))
 
   if (!responseCity.coord || responseCity.cod === '404') {
-    return (
-      <>
-        <section className="w-full max-w-[712px] bg-white/20 backdrop-blur-sm rounded-2xl border border-white/32">
-          <SearchCity />
-          <div className="px-10 pb-10 md:py-10 flex flex-col items-center justify-center text-slate-700">
-            <LuLink2Off size={20} />
-            Cidade não encontrada. Tente novamente.
-          </div>
-        </section>
-      </>
-    )
+    return <NotFoundCity />
   }
 
   const lat = responseCity.coord.lat
@@ -46,6 +37,11 @@ export default async function WeatherWidget({ city }: WeatherWidgetProps) {
     .catch((err) => console.error(err))
 
   const dataItems = responseCityDaily.hourly as WeatherItemProps[]
+  const newDataItems = []
+
+  for (let i = 1; i < 13; i++) {
+    newDataItems.push(dataItems[i])
+  }
 
   return (
     <>
@@ -62,30 +58,29 @@ export default async function WeatherWidget({ city }: WeatherWidgetProps) {
           />
           <ul
             id="temp-hours"
-            className="py-5 flex items-center justify-start gap-2 w-full overflow-y-auto"
+            className="py-5 flex items-center justify-start gap-2 w-full md:w-fit overflow-y-auto"
           >
-            {dataItems.map((item: WeatherItemProps) => {
+            {newDataItems.map((item: WeatherItemProps) => {
               const key = item.dt
-              const alt = item.weather[0].description
-              const hour = item.dt
-              const hourConverter = new Date(hour * 1000).toLocaleTimeString(
+              const description =
+                item.weather?.[0]?.description ?? 'Sem descrição'
+              const hourDT = Number(item.dt)
+              const hourConverter = new Date(hourDT * 1000).toLocaleTimeString(
                 'pt-BR',
                 {
                   hour: '2-digit',
                 }
               )
               const temp = item.temp
-              const icon = item.weather[0].icon
+              const icon = item.weather?.[0]?.icon ?? 'sem-icone'
 
               return (
                 <WeatherItem
                   key={key}
-                  alt={alt}
-                  hour={hourConverter}
+                  description={description}
+                  dt={hourConverter}
                   temp={(temp as number).toFixed(0)}
                   icon={icon}
-                  dt={''}
-                  weather={[]}
                 />
               )
             })}

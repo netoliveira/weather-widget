@@ -22,10 +22,10 @@ export default function WeatherCurrent(props: WeatherCurrentProps) {
       </div>
       <div className="text-slate-800 text-center">
         <h1 className="text-3xl">{props.city}</h1>
-        <h2 className="text-7xl">{props.temp}º</h2>
+        <h2 className="text-7xl">{props.temp}ºC</h2>
         <div className="flex items-center justify-center gap-10 font-semibold">
-          <span>Mín.: {props.minTemp}º</span>
-          <span>Máx.: {props.maxTemp}º</span>
+          <span>Mín.: {props.minTemp}ºC</span>
+          <span>Máx.: {props.maxTemp}ºC</span>
         </div>
       </div>
     </div>

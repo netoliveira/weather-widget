@@ -1,10 +1,10 @@
 export type WeatherItemProps = {
-  dt: string | number
+  key: string
+  dt: string
+  description: string
   temp: string | number
-  alt: string
-  hour: string | number
   icon: string
-  weather: {
+  weather?: {
     description: string
     icon: string
   }[]
