@@ -15,7 +15,7 @@ export default function SearchCity() {
   return (
     <form
       action={handleSearchCity}
-      className="group px-5 flex items-center gap-2 border-b border-white/32"
+      className="group px-5 flex items-center gap-2"
     >
       <label htmlFor="cidade">
         <LuSearch

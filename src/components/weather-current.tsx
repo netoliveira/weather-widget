@@ -4,9 +4,9 @@ interface WeatherCurrentProps {
   icon: string
   alt: string
   city: string
-  temp: string
-  minTemp: string
-  maxTemp: string
+  temp: string | number
+  minTemp: string | number
+  maxTemp: string | number
 }
 
 export default function WeatherCurrent(props: WeatherCurrentProps) {
