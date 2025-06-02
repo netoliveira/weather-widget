@@ -55,11 +55,11 @@ export default async function WeatherWidget(props: WeatherWidgetProps) {
         <div className="px-10 pb-10 md:py-10 flex flex-col items-center justify-center border-t border-white/20">
           <WeatherCurrent
             city={searchCityDaily.name}
-            temp={searchCityDaily.main.temp.toFixed(0)}
-            minTemp={searchCityDaily.main.temp_min.toFixed(0)}
-            maxTemp={searchCityDaily.main.temp_max.toFixed(0)}
-            icon={searchCityDaily.weather[0].icon}
-            alt={searchCityDaily.weather[0].description}
+            temp={searchCityDailyHour.daily[0].temp.day.toFixed(0)}
+            minTemp={searchCityDailyHour.daily[0].temp.min.toFixed(0)}
+            maxTemp={searchCityDailyHour.daily[0].temp.max.toFixed(0)}
+            icon={searchCityDailyHour.daily[0].weather[0].icon}
+            alt={searchCityDailyHour.daily[0].weather[0].description}
           />
           <ul
             id="temp-hours"
