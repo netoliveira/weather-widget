@@ -7,7 +7,7 @@ async function getReposGitHub() {
   const response = await fetch(
     'https://api.github.com/users/netoliveira/repos',
     {
-      cache: 'no-cache',
+      cache: 'no-store',
     }
   )
   return response.json()
