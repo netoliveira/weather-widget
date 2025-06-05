@@ -4,7 +4,12 @@ interface getReposGitHubProps {
 }
 
 async function getReposGitHub() {
-  const response = await fetch('https://api.github.com/users/netoliveira/repos')
+  const response = await fetch(
+    'https://api.github.com/users/netoliveira/repos',
+    {
+      cache: 'no-cache',
+    }
+  )
   return response.json()
 }
 
